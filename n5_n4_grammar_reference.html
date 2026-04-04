@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N5 / N4 核心语法参考</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f5f5f0; color: #1a1a1a; padding: 2rem 1rem; }
+.wrap { max-width: 960px; margin: 0 auto; }
+h1 { font-size: 20px; font-weight: 500; margin-bottom: 1.5rem; color: #1a1a1a; }
+.tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab { padding: 6px 18px; border-radius: 20px; border: 0.5px solid #ccc; font-size: 14px; cursor: pointer; background: transparent; color: #555; transition: all 0.15s; }
+.tab.active { background: #e8e8e4; color: #1a1a1a; border-color: #999; font-weight: 500; }
+.level-badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; }
+.n5 { background: #E1F5EE; color: #0F6E56; }
+.n4 { background: #E6F1FB; color: #185FA5; }
+.section { margin-bottom: 2rem; }
+.section-title { font-size: 15px; font-weight: 500; color: #666; border-bottom: 0.5px solid #ddd; padding-bottom: 6px; margin-bottom: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.card { background: #fff; border: 0.5px solid #ddd; border-radius: 12px; padding: 14px 16px; }
+.card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.pattern { font-size: 15px; font-weight: 500; color: #1a1a1a; font-family: "SFMono-Regular", Consolas, monospace; }
+.meaning { font-size: 13px; color: #666; margin-bottom: 6px; }
+.example { font-size: 13px; color: #1a1a1a; background: #f5f5f0; border-radius: 8px; padding: 6px 10px; margin-bottom: 4px; }
+.example-zh { font-size: 12px; color: #999; padding: 0 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>N5 / N4 核心语法参考</h1>
+  <div class="tabs">
+    <button class="tab active" onclick="show('all')">全部</button>
+    <button class="tab" onclick="show('助词')">助词</button>
+    <button class="tab" onclick="show('动词')">动词形式</button>
+    <button class="tab" onclick="show('句型')">句型表达</button>
+    <button class="tab" onclick="show('时态')">时态/否定</button>
+    <button class="tab" onclick="show('n4')">N4重点</button>
+  </div>
+  <div id="content"></div>
+</div>
+
+<script>
+const data = [
+  {
+    section: "助词", items: [
+      { level:"N5", pattern:"は / が", meaning:"主题助词 / 主格助词", ex:"私は学生です。/ 猫が好きです。", zh:"我是学生。/ 我喜欢猫。" },
+      { level:"N5", pattern:"を", meaning:"宾语助词（动作对象）", ex:"水を飲みます。", zh:"喝水。" },
+      { level:"N5", pattern:"に", meaning:"时间/目的地/目标", ex:"３時に起きます。/ 東京に行きます。", zh:"3点起床。/ 去东京。" },
+      { level:"N5", pattern:"で", meaning:"场所/手段/原因", ex:"図書館で読みます。/ バスで行きます。", zh:"在图书馆读。/ 坐公交去。" },
+      { level:"N5", pattern:"へ", meaning:"方向（目的地）", ex:"学校へ行きます。", zh:"去学校。" },
+      { level:"N5", pattern:"と", meaning:"和…一起/引用", ex:"友達と行きます。", zh:"和朋友去。" },
+      { level:"N5", pattern:"の", meaning:"所有/修饰", ex:"私の本。/ 日本語の先生。", zh:"我的书。/ 日语老师。" },
+      { level:"N5", pattern:"も", meaning:"也", ex:"私も行きます。", zh:"我也去。" },
+      { level:"N5", pattern:"から / まで", meaning:"从…/到…", ex:"９時から５時まで。", zh:"从9点到5点。" },
+      { level:"N4", pattern:"だけ", meaning:"只/仅", ex:"水だけ飲みます。", zh:"只喝水。" },
+      { level:"N4", pattern:"しか〜ない", meaning:"只有…（否定语气）", ex:"100円しかない。", zh:"只有100日元。" },
+      { level:"N4", pattern:"より", meaning:"比较（比…）", ex:"電車より速い。", zh:"比电车快。" },
+      { level:"N4", pattern:"ために", meaning:"为了…", ex:"健康のために走ります。", zh:"为了健康而跑步。" },
+      { level:"N4", pattern:"によって", meaning:"根据/由于/被（…所）", ex:"人によって違います。", zh:"因人而异。" },
+      { level:"N4", pattern:"について", meaning:"关于…", ex:"日本について話します。", zh:"谈论关于日本的事。" },
+    ]
+  },
+  {
+    section: "动词", items: [
+      { level:"N5", pattern:"〜ます / 〜ません", meaning:"礼貌体肯定/否定", ex:"食べます / 食べません", zh:"吃 / 不吃" },
+      { level:"N5", pattern:"〜ました / 〜ませんでした", meaning:"过去时礼貌体", ex:"食べました / 食べませんでした", zh:"吃了 / 没吃" },
+      { level:"N5", pattern:"〜て形", meaning:"连接动词/请求（てください）", ex:"食べて、飲みます。/ 見てください。", zh:"吃了然后喝。/ 请看。" },
+      { level:"N5", pattern:"〜たい", meaning:"想要做…", ex:"日本に行きたい。", zh:"想去日本。" },
+      { level:"N5", pattern:"〜ている", meaning:"正在进行/状态持续", ex:"食べています。/ 結婚しています。", zh:"正在吃。/ 已婚。" },
+      { level:"N5", pattern:"〜ないでください", meaning:"请不要…", ex:"ここで写真を撮らないでください。", zh:"请不要在这里拍照。" },
+      { level:"N4", pattern:"〜た形（普通体）", meaning:"普通体过去时（日常对话基础）", ex:"昨日、映画を見た。", zh:"昨天看了电影。" },
+      { level:"N4", pattern:"〜てしまう", meaning:"不小心做了/做完了（带遗憾语气）", ex:"財布を忘れてしまった。", zh:"不小心忘了钱包。" },
+      { level:"N4", pattern:"〜てみる", meaning:"试着做…", ex:"食べてみてください。", zh:"请试着吃吃看。" },
+      { level:"N4", pattern:"〜ておく", meaning:"提前做/先做好", ex:"予約しておきます。", zh:"先预订好。" },
+      { level:"N4", pattern:"〜てあげる/もらう/くれる", meaning:"给予/接受的授受动词", ex:"友達に教えてもらった。", zh:"让朋友教了我。" },
+      { level:"N4", pattern:"〜させる / 〜させられる", meaning:"使役 / 使役被动", ex:"食べさせる / 食べさせられる", zh:"让…吃 / 被迫吃" },
+      { level:"N4", pattern:"〜られる（被动）", meaning:"被动态", ex:"先生に褒められた。", zh:"被老师表扬了。" },
+      { level:"N4", pattern:"〜ことができる", meaning:"能够/可以做…", ex:"泳ぐことができます。", zh:"能游泳。" },
+    ]
+  },
+  {
+    section: "句型", items: [
+      { level:"N5", pattern:"〜ですね / 〜ですよ", meaning:"确认/强调语气助词", ex:"いい天気ですね。", zh:"天气真好啊。" },
+      { level:"N5", pattern:"〜が好き/嫌い/上手/下手", meaning:"喜欢/不喜欢/擅长/不擅长", ex:"音楽が好きです。", zh:"喜欢音乐。" },
+      { level:"N5", pattern:"〜がある/いる", meaning:"存在（物/人）", ex:"机の上に本があります。", zh:"桌上有书。" },
+      { level:"N5", pattern:"〜より〜の方が", meaning:"比较句型", ex:"犬より猫の方が好きです。", zh:"比起狗更喜欢猫。" },
+      { level:"N4", pattern:"〜と思う", meaning:"我认为…", ex:"明日は雨だと思います。", zh:"我觉得明天会下雨。" },
+      { level:"N4", pattern:"〜かもしれない", meaning:"也许/可能", ex:"彼は来ないかもしれない。", zh:"他也许不来。" },
+      { level:"N4", pattern:"〜はずだ", meaning:"理应/应该（有根据的推测）", ex:"彼女は来るはずです。", zh:"她应该会来的。" },
+      { level:"N4", pattern:"〜そうだ（様態）", meaning:"看起来…/感觉…", ex:"おいしそうだ。", zh:"看起来很好吃。" },
+      { level:"N4", pattern:"〜ようだ / 〜らしい", meaning:"好像/据说（推测/传闻）", ex:"風邪らしい。/ 病気のようだ。", zh:"好像感冒了。" },
+      { level:"N4", pattern:"〜なら", meaning:"如果（话题条件）", ex:"日本に行くなら、富士山を見てください。", zh:"如果去日本的话，请看富士山。" },
+      { level:"N4", pattern:"〜ても", meaning:"即使…也", ex:"雨が降っても行きます。", zh:"即使下雨也去。" },
+      { level:"N4", pattern:"〜ために / 〜ように", meaning:"为了（目的）", ex:"合格するために勉強します。", zh:"为了合格而学习。" },
+    ]
+  },
+  {
+    section: "时态", items: [
+      { level:"N5", pattern:"〜ない（否定）", meaning:"普通体否定", ex:"食べない / 来ない", zh:"不吃 / 不来" },
+      { level:"N5", pattern:"〜なかった", meaning:"过去否定", ex:"昨日は食べなかった。", zh:"昨天没吃。" },
+      { level:"N5", pattern:"〜でした / じゃなかった", meaning:"名词/形容词过去/过去否定", ex:"学生でした。/ 元気じゃなかった。", zh:"曾是学生。/ 不精神。" },
+      { level:"N5", pattern:"〜くなる / 〜になる", meaning:"变得…（变化）", ex:"暖かくなる。/ 元気になる。", zh:"变暖了。/ 变精神了。" },
+      { level:"N4", pattern:"〜たことがある", meaning:"曾经做过…（经验）", ex:"富士山に登ったことがある。", zh:"曾经爬过富士山。" },
+      { level:"N4", pattern:"〜たばかり", meaning:"刚刚做完…", ex:"日本に来たばかりです。", zh:"刚来日本。" },
+      { level:"N4", pattern:"〜ながら", meaning:"一边…一边…", ex:"音楽を聞きながら勉強する。", zh:"一边听音乐一边学习。" },
+      { level:"N4", pattern:"〜前に / 〜後で", meaning:"…之前/之后", ex:"寝る前に歯を磨く。", zh:"睡前刷牙。" },
+    ]
+  },
+];
+
+const n4only = data.map(s => ({section: s.section, items: s.items.filter(i => i.level === "N4")})).filter(s => s.items.length);
+
+function renderCards(items) {
+  if (!items.length) return '<p style="color:#999;font-size:14px;">暂无内容</p>';
+  const bySection = {};
+  items.forEach(item => {
+    const key = item._section || '其他';
+    if (!bySection[key]) bySection[key] = [];
+    bySection[key].push(item);
+  });
+  return Object.entries(bySection).map(([sec, cards]) => `
+    <div class="section">
+      <div class="section-title">${sec}</div>
+      <div class="grid">
+        ${cards.map(c => `
+          <div class="card">
+            <div class="card-head">
+              <span class="pattern">${c.pattern}</span>
+              <span class="level-badge ${c.level.toLowerCase()}">${c.level}</span>
+            </div>
+            <div class="meaning">${c.meaning}</div>
+            <div class="example">${c.ex}</div>
+            <div class="example-zh">${c.zh}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function show(tab) {
+  const labels = { all:'全部', '助词':'助词', '动词':'动词形式', '句型':'句型表达', '时态':'时态/否定', n4:'N4重点' };
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.textContent.trim() === labels[tab]));
+  let items = [];
+  if (tab === 'n4') {
+    n4only.forEach(s => s.items.forEach(i => items.push({...i, _section: s.section})));
+  } else {
+    data.forEach(s => {
+      const map = { '助词':'助词', '动词':'动词形式', '句型':'句型表达', '时态':'时态/否定' };
+      if (tab === 'all' || s.section === map[tab]) {
+        s.items.forEach(i => items.push({...i, _section: s.section}));
+      }
+    });
+  }
+  document.getElementById('content').innerHTML = renderCards(items);
+}
+
+show('all');
+</script>
+</body>
+</html>
