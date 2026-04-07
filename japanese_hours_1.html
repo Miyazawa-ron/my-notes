@@ -4,7 +4,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>日语时刻表 — 24時間</title>
-<link href="./日语时刻表 — 24時間_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+SC:wght@300;400&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #1a1a2e;
@@ -202,9 +202,38 @@
     .grid { grid-template-columns: repeat(2, 1fr); }
     header h1 { font-size: 1.4rem; }
   }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--card-bg);
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: 20px;
+  }
+  .back-btn:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .back-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+  }
 </style>
 </head>
 <body>
+
+<div class="back-wrap">
+  <a class="back-btn" href="index.html">← 返回导航首页</a>
+</div>
 
 <header>
   <h1>24時間の言い方</h1>
