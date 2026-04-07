@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日语时刻表 — 24時間</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+SC:wght@300;400&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f5f0e8;
+    --red: #c0392b;
+    --gold: #b8860b;
+    --muted: #7a7060;
+    --line: #d4cdb8;
+    --card-bg: #fffdf7;
+    --special-bg: #fff5f5;
+    --special-border: #e8b4b4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    font-family: 'Noto Sans SC', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 31px,
+        var(--line) 31px,
+        var(--line) 32px
+      );
+  }
+
+  header {
+    max-width: 720px;
+    margin: 0 auto 48px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 16px;
+  }
+
+  header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+
+  header .subtitle {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .note-banner {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    background: var(--special-bg);
+    border: 1px solid var(--special-border);
+    border-left: 4px solid var(--red);
+    padding: 14px 18px;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    color: var(--ink);
+    line-height: 1.8;
+  }
+
+  .note-banner strong {
+    color: var(--red);
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  .note-banner .pairs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    margin-top: 8px;
+  }
+
+  .note-banner .pair {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+  }
+
+  .pair .wrong {
+    text-decoration: line-through;
+    color: var(--muted);
+    font-family: 'Noto Serif JP', serif;
+  }
+  .pair .arrow { color: var(--muted); }
+  .pair .right {
+    color: var(--red);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+  }
+
+  .grid {
+    max-width: 720px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .card {
+    background: var(--card-bg);
+    padding: 20px 18px 18px;
+    position: relative;
+    transition: background 0.15s;
+    cursor: default;
+  }
+
+  .card:hover {
+    background: #fffff8;
+    z-index: 1;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  }
+
+  .card.special {
+    background: var(--special-bg);
+  }
+  .card.special:hover {
+    background: #fff0f0;
+  }
+
+  .hour-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .kanji {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .card.special .kanji {
+    color: var(--red);
+  }
+
+  .kana {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .romaji {
+    font-family: 'DM Mono', monospace;
+    font-style: italic;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  .special-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--red);
+    color: white;
+    font-size: 0.55rem;
+    padding: 2px 5px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .divider {
+    max-width: 720px;
+    margin: 24px auto 0;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    font-family: 'DM Mono', monospace;
+  }
+
+  @media (max-width: 500px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    header h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>24時間の言い方</h1>
+  <span class="subtitle">日语时刻笔记</span>
+</header>
+
+<div class="note-banner">
+  <strong>⚠ 要注意</strong> — 以下4个时刻读法特殊，容易出错：
+  <div class="pairs">
+    <div class="pair">
+      <span class="wrong">しじ</span>
+      <span class="arrow">→</span>
+      <span class="right">よじ（4時）</span>
+    </div>
+    <div class="pair">
+      <span class="wrong">きゅうじ</span>
+      <span class="arrow">→</span>
+      <span class="right">くじ（9時）</span>
+    </div>
+    <div class="pair">
+      <span class="wrong">じゅうしじ</span>
+      <span class="arrow">→</span>
+      <span class="right">じゅうよじ（14時）</span>
+    </div>
+    <div class="pair">
+      <span class="wrong">じゅうきゅうじ</span>
+      <span class="arrow">→</span>
+      <span class="right">じゅうくじ（19時）</span>
+    </div>
+  </div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="divider">— JLPT N4-N5 vocabulary · 24時間表記 —</div>
+
+<script>
+const hours = [
+  { n: 1,  kanji: "1時",     kana: "いちじ",         romaji: "ichi ji" },
+  { n: 2,  kanji: "2時",     kana: "にじ",           romaji: "ni ji" },
+  { n: 3,  kanji: "3時",     kana: "さんじ",         romaji: "san ji" },
+  { n: 4,  kanji: "4時",     kana: "よじ",           romaji: "yo ji",        special: true },
+  { n: 5,  kanji: "5時",     kana: "ごじ",           romaji: "go ji" },
+  { n: 6,  kanji: "6時",     kana: "ろくじ",         romaji: "roku ji" },
+  { n: 7,  kanji: "7時",     kana: "しちじ",         romaji: "shichi ji" },
+  { n: 8,  kanji: "8時",     kana: "はちじ",         romaji: "hachi ji" },
+  { n: 9,  kanji: "9時",     kana: "くじ",           romaji: "ku ji",        special: true },
+  { n: 10, kanji: "10時",    kana: "じゅうじ",       romaji: "jū ji" },
+  { n: 11, kanji: "11時",    kana: "じゅういちじ",   romaji: "jūichi ji" },
+  { n: 12, kanji: "12時",    kana: "じゅうにじ",     romaji: "jūni ji" },
+  { n: 13, kanji: "13時",    kana: "じゅうさんじ",   romaji: "jūsan ji" },
+  { n: 14, kanji: "14時",    kana: "じゅうよじ",     romaji: "jūyo ji",      special: true },
+  { n: 15, kanji: "15時",    kana: "じゅうごじ",     romaji: "jūgo ji" },
+  { n: 16, kanji: "16時",    kana: "じゅうろくじ",   romaji: "jūroku ji" },
+  { n: 17, kanji: "17時",    kana: "じゅうしちじ",   romaji: "jūshichi ji" },
+  { n: 18, kanji: "18時",    kana: "じゅうはちじ",   romaji: "jūhachi ji" },
+  { n: 19, kanji: "19時",    kana: "じゅうくじ",     romaji: "jūku ji",      special: true },
+  { n: 20, kanji: "20時",    kana: "にじゅうじ",     romaji: "nijū ji" },
+  { n: 21, kanji: "21時",    kana: "にじゅういちじ", romaji: "nijūichi ji" },
+  { n: 22, kanji: "22時",    kana: "にじゅうにじ",   romaji: "nijūni ji" },
+  { n: 23, kanji: "23時",    kana: "にじゅうさんじ", romaji: "nijūsan ji" },
+  { n: 24, kanji: "24時／0時", kana: "にじゅうよじ／れいじ", romaji: "nijūyo ji / rei ji" },
+];
+
+const grid = document.getElementById('grid');
+hours.forEach(h => {
+  const card = document.createElement('div');
+  card.className = 'card' + (h.special ? ' special' : '');
+  card.innerHTML = `
+    ${h.special ? '<span class="special-tag">注意</span>' : ''}
+    <div class="hour-num">${String(h.n).padStart(2,'0')}:00</div>
+    <div class="kanji">${h.kanji}</div>
+    <div class="kana">${h.kana}</div>
+    <div class="romaji">${h.romaji}</div>
+  `;
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>
