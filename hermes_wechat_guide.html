@@ -85,6 +85,7 @@
             overflow-x: auto;
             margin: 15px 0;
             border: 1px solid var(--light-blue);
+            white-space: pre;
         }
 
         /* 步骤列表 */
@@ -181,13 +182,9 @@
     <section>
         <h2>第二步：在电脑 (WSL) 中植入程序</h2>
         <p>在你的 Ubuntu (WSL) 终端中，执行官方提供的一键安装脚本。它会自动配置 Python 和 Node.js 环境。</p>
-        <code-block>
-            curl -sL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
-        </code-block>
+        <code-block>curl -sL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</code-block>
         <p>安装完成后，刷新系统环境：</p>
-        <code-block>
-            source ~/.bashrc
-        </code-block>
+        <code-block>source ~/.bashrc</code-block>
     </section>
 
     <section>
@@ -206,9 +203,7 @@
     <section>
         <h2>第四步：启动微信联动</h2>
         <p>最后，输入指令启动网关：</p>
-        <code-block>
-            hermes gateway
-        </code-block>
+        <code-block>hermes gateway</code-block>
         <p>拿出手机，扫描终端里弹出的二维码。看到 <b>“微信连接成功”</b> 之后，你的私人 AI 助手就正式入驻微信了！</p>
     </section>
 
