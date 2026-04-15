@@ -1,0 +1,75 @@
+<!-- ============================================================
+  微信公众号版 · 复制下方 <section> 整块内容到公众号编辑器即可
+  所有样式均为 inline style，兼容秀米/135/公众号自带编辑器
+  ============================================================ -->
+<section style="font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.8;color:#333333;background-color:#FDF5E6;padding:24px 16px;">
+
+  <!-- 标题区 -->
+  <section style="text-align:center;margin-bottom:28px;">
+    <h1 style="color:#FF4500;font-size:24px;font-weight:bold;margin:0 0 12px 0;letter-spacing:1px;">Hermes 超级大脑</h1>
+    <section style="display:inline-block;background-color:#ADD8E6;color:#333333;padding:6px 18px;border-radius:20px;font-size:14px;">24h 私人 AI 微信助理部署指南</section>
+  </section>
+
+  <!-- 第一步 -->
+  <section style="background-color:#ffffff;border-radius:12px;padding:20px;margin-bottom:22px;border-left:5px solid #ADD8E6;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+    <h2 style="color:#FF4500;font-size:18px;font-weight:bold;margin:0 0 14px 0;">◆ 第一步：获取“灵魂” (Google API Key)</h2>
+    <p style="margin:0 0 12px 0;font-size:15px;">Hermes 的强大核心源自谷歌 Gemini 模型。你需要先申请一把免费的“钥匙”。</p>
+    <ol style="padding-left:22px;margin:12px 0;font-size:15px;">
+      <li style="margin-bottom:10px;">访问 <strong>Google AI Studio</strong> 官网（复制到浏览器打开）：<br><span style="color:#FF4500;font-family:Consolas,monospace;font-size:14px;">aistudio.google.com</span></li>
+      <li style="margin-bottom:10px;">登录你的 Google 账号，点击左侧蓝色的 <strong>“Get API key”</strong> 按钮。</li>
+      <li style="margin-bottom:10px;">点击 <strong>“Create API key in new project”</strong>。</li>
+      <li style="margin-bottom:10px;"><strong>关键：</strong>复制那串以 <code style="background-color:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:Consolas,monospace;font-size:14px;color:#c7254e;">AIza...</code> 开头的字符并保存好。千万不要泄露给别人！</li>
+    </ol>
+  </section>
+
+  <!-- 第二步 -->
+  <section style="background-color:#ffffff;border-radius:12px;padding:20px;margin-bottom:22px;border-left:5px solid #ADD8E6;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+    <h2 style="color:#FF4500;font-size:18px;font-weight:bold;margin:0 0 14px 0;">◆ 第二步：在电脑 (WSL) 中植入程序</h2>
+    <p style="margin:0 0 12px 0;font-size:15px;">在你的 Ubuntu (WSL) 终端中，执行官方提供的一键安装脚本。它会自动配置 Python 和 Node.js 环境。</p>
+    <pre style="background-color:#2d2d2d;color:#f8f8f2;padding:14px;border-radius:8px;font-family:Consolas,monospace;font-size:13px;overflow-x:auto;margin:12px 0;white-space:pre-wrap;word-break:break-all;">curl -sL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
+    <p style="margin:12px 0;font-size:15px;">安装完成后，刷新系统环境：</p>
+    <pre style="background-color:#2d2d2d;color:#f8f8f2;padding:14px;border-radius:8px;font-family:Consolas,monospace;font-size:13px;overflow-x:auto;margin:12px 0;white-space:pre-wrap;">source ~/.bashrc</pre>
+  </section>
+
+  <!-- 第三步 -->
+  <section style="background-color:#ffffff;border-radius:12px;padding:20px;margin-bottom:22px;border-left:5px solid #ADD8E6;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+    <h2 style="color:#FF4500;font-size:18px;font-weight:bold;margin:0 0 14px 0;">◆ 第三步：精准驯服（核心设置）</h2>
+    <p style="margin:0 0 12px 0;font-size:15px;">输入 <code style="background-color:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:Consolas,monospace;font-size:14px;color:#c7254e;">hermes setup</code> 开始配置。请注意以下核心选择点：</p>
+    <section style="background-color:rgba(173,216,230,0.25);padding:14px 16px;border-radius:8px;border-left:4px solid #FF4500;font-size:14px;margin:14px 0;">
+      <p style="margin:0 0 8px 0;"><strong>1. 智商选择：</strong>遇到 Model 名称输入时，手动填入：<code style="background-color:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:Consolas,monospace;font-size:13px;color:#c7254e;">gemini-2.5-flash</code></p>
+      <p style="margin:0 0 8px 0;"><strong>2. 通道选择：</strong>挪到 <strong>Weixin</strong> 选项，按<strong>空格键</strong>出现 <code style="background-color:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:Consolas,monospace;font-size:13px;color:#c7254e;">[✓]</code> 再回车。</p>
+      <p style="margin:0;"><strong>3. 安全策略：</strong>为了绝对防封，目前仅支持 <strong>私聊 (Direct Messages)</strong>。扫码后直接开启所有私聊权限。</p>
+    </section>
+  </section>
+
+  <!-- 第四步 -->
+  <section style="background-color:#ffffff;border-radius:12px;padding:20px;margin-bottom:22px;border-left:5px solid #ADD8E6;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+    <h2 style="color:#FF4500;font-size:18px;font-weight:bold;margin:0 0 14px 0;">◆ 第四步：启动微信联动</h2>
+    <p style="margin:0 0 12px 0;font-size:15px;">最后，输入指令启动网关：</p>
+    <pre style="background-color:#2d2d2d;color:#f8f8f2;padding:14px;border-radius:8px;font-family:Consolas,monospace;font-size:13px;overflow-x:auto;margin:12px 0;white-space:pre-wrap;">hermes gateway</pre>
+    <p style="margin:12px 0 0 0;font-size:15px;">拿出手机，扫描终端里弹出的二维码。看到 <strong>“微信连接成功”</strong> 之后，你的私人 AI 助手就正式入驻微信了！</p>
+  </section>
+
+  <!-- 第五步 -->
+  <section style="background-color:#ffffff;border-radius:12px;padding:20px;margin-bottom:22px;border-left:5px solid #ADD8E6;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+    <h2 style="color:#FF4500;font-size:18px;font-weight:bold;margin:0 0 14px 0;">◆ 第五步：日常极客指令手册</h2>
+    <ul style="padding-left:22px;margin:12px 0;font-size:15px;">
+      <li style="margin-bottom:10px;"><strong>微信站岗：</strong><code style="background-color:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:Consolas,monospace;font-size:14px;color:#c7254e;">hermes gateway</code>（此窗口保持运行）</li>
+      <li style="margin-bottom:10px;"><strong>电脑直聊：</strong>新开窗口输入 <code style="background-color:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:Consolas,monospace;font-size:14px;color:#c7254e;">hermes</code> 即可本地操作</li>
+      <li style="margin-bottom:10px;"><strong>修改设置：</strong><code style="background-color:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:Consolas,monospace;font-size:14px;color:#c7254e;">hermes setup gateway</code>（可随时重扫码）</li>
+      <li style="margin-bottom:10px;"><strong>官方文档：</strong><span style="color:#FF4500;font-family:Consolas,monospace;font-size:14px;">hermes-agent.nousresearch.com</span></li>
+    </ul>
+  </section>
+
+  <!-- 结尾：为什么只开私聊 -->
+  <section style="background-color:#ffffff;border-radius:12px;padding:20px;margin-bottom:22px;border-left:5px solid #FF4500;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+    <h2 style="color:#FF4500;font-size:18px;font-weight:bold;margin:0 0 14px 0;">◆ 为什么只开私聊？</h2>
+    <p style="margin:0;font-size:15px;">腾讯对 <strong>@im.bot</strong> 官方号有严格限制。目前的配置采用 <strong>100% 官方正规通道</strong>，彻底杜绝了破解协议导致的封号风险。你可以通过将“机器人名片”推荐给好友的方式，让他们体验你的 AI 助理，既安全又优雅。</p>
+  </section>
+
+  <!-- 页脚 -->
+  <section style="text-align:center;padding:24px 0 8px 0;font-size:12px;color:#888888;">
+    © 2026 Miyazawa 的极客空间 | 基于 Hermes Agent 框架构建
+  </section>
+
+</section>
