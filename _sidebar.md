@@ -1,3 +1,5 @@
 - [首页](/)
 - 日语学习
   - [N5/N4 语法参考](n5_n4_grammar_reference)
+- 工具 & 指南
+  - [Hermes 微信助理部署](hermes_wechat_guide)

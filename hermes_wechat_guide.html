@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes 微信私人助理：部署全攻略</title>
+    <style>
+        /* 配色方案：50% 暖白 (#FDF5E6), 30% 浅蓝 (#ADD8E6), 20% 橘红 (#FF4500) */
+        :root {
+            --warm-white: #FDF5E6;
+            --light-blue: #ADD8E6;
+            --orange-red: #FF4500;
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            color: var(--orange-red);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            background-color: var(--light-blue);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        /* 章节卡片 */
+        section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--light-blue);
+        }
+
+        h2 {
+            color: var(--orange-red);
+            font-size: 1.5rem;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: "◆";
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        /* 命令框 */
+        code-block {
+            display: block;
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid var(--light-blue);
+        }
+
+        /* 步骤列表 */
+        .step-list {
+            padding-left: 20px;
+        }
+
+        .step-list li {
+            margin-bottom: 15px;
+            list-style-type: decimal;
+        }
+
+        /* 提示框 */
+        .tip {
+            background-color: rgba(173, 216, 230, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--orange-red);
+            font-size: 0.95rem;
+            margin: 15px 0;
+        }
+
+        /* 链接按钮 */
+        .btn {
+            display: inline-block;
+            background-color: var(--orange-red);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* 自适应图片占位 */
+        .img-placeholder {
+            width: 100%;
+            background-color: var(--light-blue);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin: 20px 0;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.7rem; }
+            section { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Hermes 超级大脑</h1>
+        <div class="subtitle">24h 私人 AI 微信助理部署指南</div>
+    </header>
+
+    <div class="img-placeholder">
+        [ 配图 1: AI 机器人与微信图标握手，背景是简约的千叶乡村风景 ]
+    </div>
+
+    <section>
+        <h2>第一步：获取“灵魂” (Google API Key)</h2>
+        <p>Hermes 的强大核心源自谷歌 Gemini 模型。你需要先申请一把免费的“钥匙”。</p>
+        <ol class="step-list">
+            <li>访问 <b>Google AI Studio</b> 官网：<br>
+                <a href="https://aistudio.google.com/" class="btn" target="_blank">点击前往申请</a>
+            </li>
+            <li>登录你的 Google 账号，点击左侧蓝色的 <b>"Get API key"</b> 按钮。</li>
+            <li>点击 <b>"Create API key in new project"</b>。</li>
+            <li><b>关键：</b> 复制那串以 `AIza...` 开头的字符并保存好。千万不要泄露给别人！</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>第二步：在电脑 (WSL) 中植入程序</h2>
+        <p>在你的 Ubuntu (WSL) 终端中，执行官方提供的一键安装脚本。它会自动配置 Python 和 Node.js 环境。</p>
+        <code-block>
+            curl -sL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+        </code-block>
+        <p>安装完成后，刷新系统环境：</p>
+        <code-block>
+            source ~/.bashrc
+        </code-block>
+    </section>
+
+    <section>
+        <h2>第三步：精准驯服（核心设置）</h2>
+        <p>输入 <code>hermes setup</code> 开始配置。请注意以下核心选择点：</p>
+        <div class="tip">
+            <b>1. 智商选择：</b> 遇到 Model 名称输入时，手动填入：<code>gemini-2.5-flash</code><br>
+            <b>2. 通道选择：</b> 挪到 <b>Weixin</b> 选项，按<b>空格键</b>出现 <code>[✓]</code> 再回车。<br>
+            <b>3. 安全策略：</b> 为了绝对防封，目前仅支持 <b>私聊 (Direct Messages)</b>。扫码后直接开启所有私聊权限。
+        </div>
+        <div class="img-placeholder">
+            [ 配图 2: 终端界面示意图，高亮显示空格键选中 Weixin 的瞬间 ]
+        </div>
+    </section>
+
+    <section>
+        <h2>第四步：启动微信联动</h2>
+        <p>最后，输入指令启动网关：</p>
+        <code-block>
+            hermes gateway
+        </code-block>
+        <p>拿出手机，扫描终端里弹出的二维码。看到 <b>“微信连接成功”</b> 之后，你的私人 AI 助手就正式入驻微信了！</p>
+    </section>
+
+    <section>
+        <h2>第五步：日常极客指令手册</h2>
+        <ul class="step-list">
+            <li><b>微信站岗：</b> <code>hermes gateway</code> (此窗口保持运行)</li>
+            <li><b>电脑直聊：</b> 新开窗口输入 <code>hermes</code> 即可本地操作</li>
+            <li><b>修改设置：</b> <code>hermes setup gateway</code> (可随时重扫码)</li>
+            <li><b>官方文档：</b> <a href="https://hermes-agent.nousresearch.com/" target="_blank" style="color:var(--orange-red);">NousResearch 官方链接</a></li>
+        </ul>
+    </section>
+
+    <section style="border-left: 6px solid var(--orange-red);">
+        <h2>为什么只开私聊？</h2>
+        <p>腾讯对 <b>@im.bot</b> 官方号有严格限制。目前的配置采用 <b>100% 官方正规通道</b>，彻底杜绝了破解协议导致的封号风险。你可以通过将“机器人名片”推荐给好友的方式，让他们体验你的 AI 助理，既安全又优雅。</p>
+    </section>
+
+    <footer>
+        © 2026 刘兄的极客空间 | 基于 Hermes Agent 框架构建
+    </footer>
+</div>
+
+</body>
+</html>
