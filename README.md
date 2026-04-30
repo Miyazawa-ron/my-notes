@@ -13,6 +13,7 @@
 | [24時間の言い方](https://miyazawa-ron.github.io/my-notes/japanese_hours_1.html) | 日语24小时读法·假名·罗马字 | 词汇 N4-N5 |
 | [N5·N4 文法リファレンス](https://miyazawa-ron.github.io/my-notes/n5_n4_grammar_reference.html) | N5·N4 常用语法总结 | 文法 |
 | [Hermes 微信助理部署攻略](https://miyazawa-ron.github.io/my-notes/hermes_wechat_guide.html) | Google API Key · WSL 安装 · 微信网关全流程 | 工具 AI |
+| [字体参考手册](https://miyazawa-ron.github.io/my-notes/font-reference.html) | 网页与公众号排版字体速查 · IBM Plex · 系统字体 · 字号规范 | 设计 排版 |
 
 ---
 
@@ -28,3 +29,4 @@
 - [ ] N4 → 当前阶段
 - [ ] N3
 - [ ] N2 目标
+
