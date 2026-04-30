@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>字体参考手册 · 网页与公众号排版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Serif+Display:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@300;400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --bg2: #f0ede6;
+    --ink: #1c1a17;
+    --ink2: #5a5550;
+    --accent: #c0392b;
+    --rule: #d8d2c8;
+    --code-bg: #1e1c1a;
+    --code-fg: #e8e0d0;
+    --green: #2d6a4f;
+    --blue: #1a4a7a;
+    --amber: #b8860b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    padding: 3rem 2rem 6rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* NAV */
+  .doc-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(250,250,248,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.6rem 2rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    z-index: 100;
+    font-size: 0.72rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .doc-nav a {
+    color: var(--ink2);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+  .doc-nav a:hover { color: var(--accent); }
+
+  body { padding-top: 4rem; }
+
+  /* HEADERS */
+  .doc-title {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+  }
+  .doc-subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink2);
+    letter-spacing: 0.12em;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 4rem;
+    padding-top: 1rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    min-width: 2rem;
+  }
+  .section-title {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .availability {
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.2em 0.6em;
+    border-radius: 2px;
+  }
+  .av-system { background: #d4edda; color: #155724; }
+  .av-cdn    { background: #d1ecf1; color: #0c5460; }
+  .av-limited{ background: #fff3cd; color: #856404; }
+
+  /* FONT CARD */
+  .font-card {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.2rem;
+  }
+  .font-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .font-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .font-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink2);
+    background: var(--bg2);
+    padding: 0.15em 0.5em;
+  }
+  .css-snippet {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--blue);
+    background: var(--bg2);
+    padding: 0.3rem 0.6rem;
+    margin-bottom: 1.2rem;
+    display: inline-block;
+  }
+
+  /* WEIGHT ROWS */
+  .weight-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0.3rem 1rem;
+    align-items: baseline;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--bg2);
+  }
+  .weight-row:last-child { border-bottom: none; }
+  .weight-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink2);
+    letter-spacing: 0.05em;
+    padding-top: 0.2rem;
+  }
+  .weight-sample { line-height: 1.3; }
+
+  /* SIZE SCALE */
+  .size-scale {
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    background: var(--bg2);
+    border-left: 3px solid var(--rule);
+  }
+  .size-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .size-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink2);
+    min-width: 80px;
+  }
+
+  /* NOTE BOX */
+  .note {
+    background: #fff8e6;
+    border-left: 3px solid var(--amber);
+    padding: 0.8rem 1rem;
+    font-size: 0.82rem;
+    color: var(--ink);
+    margin: 1rem 0;
+    line-height: 1.6;
+  }
+  .note strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--amber);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .warn {
+    background: #fdecea;
+    border-left: 3px solid var(--accent);
+  }
+  .warn strong { color: var(--accent); }
+
+  /* COMPARISON TABLE */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin: 1rem 0;
+  }
+  .comp-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 2px solid var(--ink);
+    color: var(--ink2);
+  }
+  .comp-table td {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .dot-yes { color: var(--green); font-weight: 700; }
+  .dot-no  { color: var(--accent); }
+  .dot-partial { color: var(--amber); }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--rule); margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<nav class="doc-nav">
+  <a href="#zh-system">中文系统字体</a>
+  <a href="#en-serif">英文衬线</a>
+  <a href="#en-sans">英文无衬线</a>
+  <a href="#mono">等宽字体</a>
+  <a href="#ibm">IBM Plex 系列</a>
+  <a href="#size-scale">字号规范</a>
+  <a href="#wechat">公众号适配</a>
+  <a href="#strategy">特殊字体方案</a>
+</nav>
+
+<h1 class="doc-title">字体参考手册</h1>
+<p class="doc-subtitle">网页 · 微信公众号排版 · 2025 · 与 Claude 协作使用</p>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 · 中文系统字体
+══════════════════════════════════════════ -->
+<section class="section" id="zh-system">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-title">中文系统字体</span>
+    <span class="availability av-system">系统字体 · 无需加载</span>
+  </div>
+
+  <div class="note">
+    <strong>关于中文字体的根本限制</strong>
+    中文字体文件通常 3–30MB，无法通过 CDN 实时加载（用户体验极差）。因此中文排版几乎只能依赖系统字体。好消息是：iOS/macOS 的苹方、Windows 的微软雅黑，在各自平台上都是优秀的字体，用 font-family 声明一个合理的 fallback 链即可覆盖绝大多数用户。
+  </div>
+
+  <!-- 苹方 -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">苹方 / PingFang SC</span>
+      <span class="font-tag">iOS · macOS · 无衬线</span>
+      <span class="font-tag">6字重</span>
+    </div>
+    <code class="css-snippet">font-family: "PingFang SC", sans-serif;</code>
+
+    <div class="weight-row">
+      <span class="weight-label">Ultralight 100</span>
+      <span class="weight-sample" style="font-family:'PingFang SC';font-weight:100;font-size:1.3rem;">代码的记忆——Git 前世今生 The quick brown fox</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Thin 200</span>
+      <span class="weight-sample" style="font-family:'PingFang SC';font-weight:200;font-size:1.3rem;">代码的记忆——Git 前世今生 The quick brown fox</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Light 300</span>
+      <span class="weight-sample" style="font-family:'PingFang SC';font-weight:300;font-size:1.3rem;">代码的记忆——Git 前世今生 The quick brown fox</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'PingFang SC';font-weight:400;font-size:1.3rem;">代码的记忆——Git 前世今生 The quick brown fox</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Medium 500</span>
+      <span class="weight-sample" style="font-family:'PingFang SC';font-weight:500;font-size:1.3rem;">代码的记忆——Git 前世今生 The quick brown fox</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Semibold 600</span>
+      <span class="weight-sample" style="font-family:'PingFang SC';font-weight:600;font-size:1.3rem;">代码的记忆——Git 前世今生 The quick brown fox</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">正文示范 16px</span>
+      <span class="weight-sample" style="font-family:'PingFang SC';font-weight:400;font-size:1rem;line-height:1.8;">1991年，一个芬兰大学生把自己写的操作系统内核发布在了互联网上，附上一句轻描淡写的话："这只是个爱好项目，不会像GNU那样大或专业。"没有人预料到接下来会发生什么。</span>
+    </div>
+  </div>
+
+  <!-- 微软雅黑 -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">微软雅黑 / Microsoft YaHei</span>
+      <span class="font-tag">Windows · 无衬线</span>
+      <span class="font-tag">2字重</span>
+    </div>
+    <code class="css-snippet">font-family: "Microsoft YaHei", "微软雅黑", sans-serif;</code>
+
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'Microsoft YaHei';font-weight:400;font-size:1.3rem;">代码的记忆——Git 前世今生 The quick brown fox</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Bold 700</span>
+      <span class="weight-sample" style="font-family:'Microsoft YaHei';font-weight:700;font-size:1.3rem;">代码的记忆——Git 前世今生 The quick brown fox</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">正文示范 16px</span>
+      <span class="weight-sample" style="font-family:'Microsoft YaHei';font-weight:400;font-size:1rem;line-height:1.8;">1991年，一个芬兰大学生把自己写的操作系统内核发布在了互联网上，附上一句轻描淡写的话："这只是个爱好项目，不会像GNU那样大或专业。"没有人预料到接下来会发生什么。</span>
+    </div>
+  </div>
+
+  <!-- 宋体/楷体 -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">宋体 / SimSun &amp; 楷体 / KaiTi</span>
+      <span class="font-tag">Windows 系统 · 衬线</span>
+    </div>
+    <code class="css-snippet">font-family: "SimSun", "宋体", serif; &nbsp;|&nbsp; font-family: "KaiTi", "楷体", serif;</code>
+
+    <div class="weight-row">
+      <span class="weight-label">宋体 Regular</span>
+      <span class="weight-sample" style="font-family:'SimSun','宋体',serif;font-size:1.3rem;">代码的记忆——Git 前世今生 软件开发的历史</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">楷体 Regular</span>
+      <span class="weight-sample" style="font-family:'KaiTi','楷体',serif;font-size:1.3rem;">代码的记忆——Git 前世今生 软件开发的历史</span>
+    </div>
+    <div class="note warn" style="margin-top:0.8rem;">
+      <strong>使用建议</strong>
+      宋体和楷体屏显效果较差，适合引用块、特殊强调，不建议用于正文大段落。
+    </div>
+  </div>
+
+  <!-- 推荐 fallback 链 -->
+  <div class="note">
+    <strong>推荐中文字体 Fallback 链（覆盖 iOS · Android · Windows · macOS）</strong>
+    <code style="font-family:'IBM Plex Mono',monospace;font-size:0.78rem;display:block;margin-top:0.5rem;line-height:1.8;color:#1a4a7a;">
+      font-family: "PingFang SC", "苹方", "Noto Sans CJK SC",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "Microsoft YaHei", "微软雅黑",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "WenQuanYi Micro Hei", sans-serif;
+    </code>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 · 英文衬线字体（Google Fonts）
+══════════════════════════════════════════ -->
+<section class="section" id="en-serif">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-title">英文衬线字体</span>
+    <span class="availability av-cdn">Google Fonts CDN · 需网络</span>
+  </div>
+
+  <!-- Playfair Display -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">Playfair Display</span>
+      <span class="font-tag">Display · 高对比度 · 适合标题</span>
+    </div>
+    <code class="css-snippet">font-family: 'Playfair Display', serif; &nbsp;|&nbsp; Google Fonts</code>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'Playfair Display',serif;font-weight:400;font-size:1.6rem;">The Memory of Code — Git</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Italic 400i</span>
+      <span class="weight-sample" style="font-family:'Playfair Display',serif;font-weight:400;font-style:italic;font-size:1.6rem;">The Memory of Code — Git</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Bold 700</span>
+      <span class="weight-sample" style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.6rem;">The Memory of Code — Git</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Bold Italic 700i</span>
+      <span class="weight-sample" style="font-family:'Playfair Display',serif;font-weight:700;font-style:italic;font-size:1.6rem;">The Memory of Code — Git</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">正文混排 16px</span>
+      <span class="weight-sample" style="font-family:'Playfair Display',serif;font-weight:400;font-size:1rem;line-height:1.8;">In 1991, a Finnish student published the kernel of an operating system on the internet, with a casual note: "this is just a hobby, won't be big and professional like GNU."</span>
+    </div>
+  </div>
+
+  <!-- DM Serif Display -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">DM Serif Display</span>
+      <span class="font-tag">Display · 优雅 · 适合大标题</span>
+    </div>
+    <code class="css-snippet">font-family: 'DM Serif Display', serif;</code>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'DM Serif Display',serif;font-weight:400;font-size:1.8rem;">The Memory of Code</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Italic 400i</span>
+      <span class="weight-sample" style="font-family:'DM Serif Display',serif;font-weight:400;font-style:italic;font-size:1.8rem;">The Memory of Code</span>
+    </div>
+  </div>
+
+  <!-- EB Garamond -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">EB Garamond</span>
+      <span class="font-tag">正文 · 古典 · 书籍感强</span>
+    </div>
+    <code class="css-snippet">font-family: 'EB Garamond', serif;</code>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'EB Garamond',serif;font-weight:400;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Italic 400i</span>
+      <span class="weight-sample" style="font-family:'EB Garamond',serif;font-weight:400;font-style:italic;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Medium 500</span>
+      <span class="weight-sample" style="font-family:'EB Garamond',serif;font-weight:500;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">正文示范 17px</span>
+      <span class="weight-sample" style="font-family:'EB Garamond',serif;font-size:1.06rem;line-height:1.85;">In 1991, a Finnish student published the kernel of an operating system on the internet. No one expected what would happen next. Developers around the world began sending patches — not through any system or platform, but by email.</span>
+    </div>
+  </div>
+
+  <!-- Lora -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">Lora</span>
+      <span class="font-tag">正文 · 适合长文 · 中英混排友好</span>
+    </div>
+    <code class="css-snippet">font-family: 'Lora', serif;</code>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'Lora',serif;font-weight:400;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Italic 400i</span>
+      <span class="weight-sample" style="font-family:'Lora',serif;font-weight:400;font-style:italic;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">SemiBold 600</span>
+      <span class="weight-sample" style="font-family:'Lora',serif;font-weight:600;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+  </div>
+
+  <!-- Source Serif 4 -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">Source Serif 4</span>
+      <span class="font-tag">正文 · Adobe出品 · 可变字体</span>
+    </div>
+    <code class="css-snippet">font-family: 'Source Serif 4', serif;</code>
+    <div class="weight-row">
+      <span class="weight-label">Light 300</span>
+      <span class="weight-sample" style="font-family:'Source Serif 4',serif;font-weight:300;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'Source Serif 4',serif;font-weight:400;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">SemiBold 600</span>
+      <span class="weight-sample" style="font-family:'Source Serif 4',serif;font-weight:600;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Light Italic 300i</span>
+      <span class="weight-sample" style="font-family:'Source Serif 4',serif;font-weight:300;font-style:italic;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 · 英文无衬线字体
+══════════════════════════════════════════ -->
+<section class="section" id="en-sans">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-title">英文无衬线字体</span>
+    <span class="availability av-cdn">Google Fonts CDN</span>
+  </div>
+
+  <div class="note">
+    <strong>在中文排版中的角色</strong>
+    无衬线英文字体适合用于标签、注释、页眉页脚、小字标注等辅助性文字，与中文主体形成对比层次。正文一般不建议纯英文无衬线搭配中文衬线——视觉上会打架。
+  </div>
+
+  <!-- IBM Plex Sans 在第5节单独详述，这里简列 -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">DM Mono（无衬线等宽）</span>
+      <span class="font-tag">标注 · 数据标签 · 清晰</span>
+    </div>
+    <code class="css-snippet">font-family: 'DM Mono', monospace;</code>
+    <div class="weight-row">
+      <span class="weight-label">Light 300</span>
+      <span class="weight-sample" style="font-family:'DM Mono',monospace;font-weight:300;font-size:1rem;">Vol.01 · 2025 · Git Series · 0x3f8c2d</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'DM Mono',monospace;font-weight:400;font-size:1rem;">Vol.01 · 2025 · Git Series · 0x3f8c2d</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Medium 500</span>
+      <span class="weight-sample" style="font-family:'DM Mono',monospace;font-weight:500;font-size:1rem;">Vol.01 · 2025 · Git Series · 0x3f8c2d</span>
+    </div>
+  </div>
+
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">Space Mono</span>
+      <span class="font-tag">等宽 · 复古感 · 个性强</span>
+    </div>
+    <code class="css-snippet">font-family: 'Space Mono', monospace;</code>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'Space Mono',monospace;font-weight:400;font-size:1rem;">Vol.01 · Git · SHA-1 · a3f8c2d</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Italic 400i</span>
+      <span class="weight-sample" style="font-family:'Space Mono',monospace;font-weight:400;font-style:italic;font-size:1rem;">Vol.01 · Git · SHA-1 · a3f8c2d</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Bold 700</span>
+      <span class="weight-sample" style="font-family:'Space Mono',monospace;font-weight:700;font-size:1rem;">Vol.01 · Git · SHA-1 · a3f8c2d</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 · IBM Plex 系列（重点）
+══════════════════════════════════════════ -->
+<section class="section" id="ibm">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-title">IBM Plex 系列 · 重点推荐</span>
+    <span class="availability av-cdn">Google Fonts · 完整可用</span>
+  </div>
+
+  <div class="note">
+    <strong>为什么 IBM Plex 值得重点对待</strong>
+    IBM Plex 是 IBM 2017年发布的开源字体家族，由 Mike Abbink 主导设计。它分三个子系列：Sans（无衬线）、Serif（衬线）、Mono（等宽），共享同一套设计语言——比例、粗细、曲线完全协调。这意味着你可以在同一个版面里自由混搭三种风格，不会产生冲突。此外，IBM Plex 对数字和标点的处理极为考究，特别适合技术内容排版。全系列通过 Google Fonts 免费加载，这是最好的消息。
+  </div>
+
+  <!-- IBM Plex Sans -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">IBM Plex Sans</span>
+      <span class="font-tag">无衬线 · 标题 · 标签 · UI文字</span>
+    </div>
+    <code class="css-snippet">font-family: 'IBM Plex Sans', sans-serif;</code>
+    <div class="weight-row">
+      <span class="weight-label">Light 300</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Sans',sans-serif;font-weight:300;font-size:1.4rem;">The Memory of Code — Git 代码的记忆</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Light Italic 300i</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Sans',sans-serif;font-weight:300;font-style:italic;font-size:1.4rem;">The Memory of Code — Git 代码的记忆</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Sans',sans-serif;font-weight:400;font-size:1.4rem;">The Memory of Code — Git 代码的记忆</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Regular Italic 400i</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Sans',sans-serif;font-weight:400;font-style:italic;font-size:1.4rem;">The Memory of Code — Git 代码的记忆</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Medium 500</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:1.4rem;">The Memory of Code — Git 代码的记忆</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Bold 700</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:1.4rem;">The Memory of Code — Git 代码的记忆</span>
+    </div>
+  </div>
+
+  <!-- IBM Plex Serif -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">IBM Plex Serif</span>
+      <span class="font-tag">衬线 · 正文 · 引用 · 与中文搭配优秀</span>
+    </div>
+    <code class="css-snippet">font-family: 'IBM Plex Serif', serif;</code>
+    <div class="weight-row">
+      <span class="weight-label">Light 300</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Serif',serif;font-weight:300;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Light Italic 300i</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Serif',serif;font-weight:300;font-style:italic;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Serif',serif;font-weight:400;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Regular Italic 400i</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Serif',serif;font-weight:400;font-style:italic;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Medium 500</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Serif',serif;font-weight:500;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Bold 700</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Serif',serif;font-weight:700;font-size:1.3rem;">The Memory of Code — Git History</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">正文示范 17px</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Serif',serif;font-weight:400;font-size:1.06rem;line-height:1.85;">In 1991, a Finnish student published the kernel of an operating system on the internet. No one expected what would happen next. Developers around the world began sending patches — not through any system, but by email.</span>
+    </div>
+  </div>
+
+  <!-- IBM Plex Mono -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">IBM Plex Mono</span>
+      <span class="font-tag">等宽 · 代码 · 数字 · 标注</span>
+    </div>
+    <code class="css-snippet">font-family: 'IBM Plex Mono', monospace;</code>
+    <div class="weight-row">
+      <span class="weight-label">Light 300</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Mono',monospace;font-weight:300;font-size:1rem;">git commit -m "init" · SHA: a3f8c2d · Vol.01</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Light Italic 300i</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Mono',monospace;font-weight:300;font-style:italic;font-size:1rem;">git commit -m "init" · SHA: a3f8c2d · Vol.01</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Regular 400</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:1rem;">git commit -m "init" · SHA: a3f8c2d · Vol.01</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Medium 500</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:1rem;">git commit -m "init" · SHA: a3f8c2d · Vol.01</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">Medium Italic 500i</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-style:italic;font-size:1rem;">git commit -m "init" · SHA: a3f8c2d · Vol.01</span>
+    </div>
+    <div class="weight-row">
+      <span class="weight-label">代码块示范</span>
+      <span class="weight-sample" style="font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:0.88rem;line-height:1.8;background:#1e1c1a;color:#e8e0d0;padding:0.8rem 1rem;display:block;">git init<br>git add .<br>git commit -m "The beginning of everything"</span>
+    </div>
+  </div>
+
+  <!-- 三合一搭配示范 -->
+  <div class="font-card" style="background:var(--bg2);">
+    <div class="font-meta">
+      <span class="font-name">IBM Plex 三合一搭配示范</span>
+    </div>
+    <div style="padding: 1.5rem; background: white; border: 1px solid var(--rule);">
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:#c0392b;margin-bottom:0.5rem;">编程工具系列 · Vol.01</p>
+      <p style="font-family:'IBM Plex Serif',serif;font-weight:400;font-size:1.8rem;line-height:1.2;margin-bottom:0.8rem;">代码的记忆<br><em style="font-style:italic;">Git 前世今生</em></p>
+      <p style="font-family:'IBM Plex Serif',serif;font-weight:400;font-size:0.95rem;line-height:1.8;color:#3a3530;margin-bottom:0.8rem;">1991年，一个芬兰大学生把自己写的操作系统内核发布在了互联网上，附上一句轻描淡写的话："这只是个爱好项目，不会像GNU那样大或专业。"</p>
+      <p style="font-family:'IBM Plex Sans',sans-serif;font-weight:300;font-size:0.78rem;color:#5a5550;border-top:1px solid #d8d2c8;padding-top:0.6rem;margin-top:0.6rem;">技术注记 · Technical Note</p>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:0.78rem;line-height:1.7;color:#1a4a7a;">SHA-1: a3f8c2d1e9b4f67890abcdef · 每个commit的唯一指纹</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 · 字号规范
+══════════════════════════════════════════ -->
+<section class="section" id="size-scale">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-title">字号规范 · 微信公众号适用</span>
+  </div>
+
+  <div class="note">
+    <strong>微信公众号字号的基本约束</strong>
+    公众号文章在手机上阅读，屏幕宽度约 375–430px。系统会对字号进行一定的缩放，但基础规律是：正文低于 14px 会明显影响可读性，低于 12px 几乎不可读。以下规范以手机阅读体验为准。
+  </div>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>用途</th>
+        <th>CSS 字号</th>
+        <th>示意</th>
+        <th>字重建议</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>大标题 / Hero</td>
+        <td><code>2rem – 2.4rem</code><br><small>32–38px</small></td>
+        <td style="font-family:'IBM Plex Serif',serif;font-size:2rem;line-height:1.2;">代码的记忆</td>
+        <td>400 / 300</td>
+      </tr>
+      <tr>
+        <td>章节标题 H2</td>
+        <td><code>1.3rem – 1.5rem</code><br><small>21–24px</small></td>
+        <td style="font-family:'IBM Plex Serif',serif;font-size:1.4rem;">Git 的诞生</td>
+        <td>400 / 500</td>
+      </tr>
+      <tr>
+        <td>小节标题 H3</td>
+        <td><code>1.05rem – 1.1rem</code><br><small>17–18px</small></td>
+        <td style="font-family:'IBM Plex Serif',serif;font-size:1.08rem;font-weight:500;">Linus 的设计目标</td>
+        <td>500 / 600</td>
+      </tr>
+      <tr>
+        <td>正文 Body</td>
+        <td><code>1rem – 1.06rem</code><br><small>16–17px</small></td>
+        <td style="font-size:1rem;line-height:1.8;">1991年，一个芬兰大学生把自己写的操作系统内核发布在了互联网上。</td>
+        <td>400</td>
+      </tr>
+      <tr>
+        <td>引用块 / 注记</td>
+        <td><code>0.95rem</code><br><small>15px</small></td>
+        <td style="font-size:0.95rem;font-style:italic;color:#5a5550;">BitKeeper让他第一次真正体会到分布式的好处。</td>
+        <td>400 italic</td>
+      </tr>
+      <tr>
+        <td>标签 / 元信息</td>
+        <td><code>0.68rem – 0.72rem</code><br><small>11–12px</small></td>
+        <td style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#c0392b;">VOL.01 · 编程工具系列</td>
+        <td>400 / 500 Mono</td>
+      </tr>
+      <tr>
+        <td>代码块</td>
+        <td><code>0.82rem – 0.88rem</code><br><small>13–14px</small></td>
+        <td style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;background:#1e1c1a;color:#e8e0d0;padding:0.3rem 0.6rem;">git commit -m "init"</td>
+        <td>400 Mono</td>
+      </tr>
+      <tr>
+        <td>脚注 / 版权</td>
+        <td><code>0.65rem</code><br><small>10–11px</small></td>
+        <td style="font-size:0.65rem;color:#8a7d6b;">© 2025 · 编程工具系列 · 转载请注明出处</td>
+        <td>300 / 400</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 6 · 微信公众号适配说明
+══════════════════════════════════════════ -->
+<section class="section" id="wechat">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <span class="section-title">微信公众号 HTML 适配说明</span>
+    <span class="availability av-limited">有限制 · 需测试</span>
+  </div>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>功能</th><th>是否支持</th><th>说明</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>内联 CSS（style=""）</td>
+        <td><span class="dot-yes">✓ 支持</span></td>
+        <td>最可靠的方式，公众号会过滤 &lt;style&gt; 标签</td>
+      </tr>
+      <tr>
+        <td>&lt;style&gt; 标签</td>
+        <td><span class="dot-partial">△ 部分</span></td>
+        <td>通过壹伴/秀米等工具发送时通常会被剥离，需内联化</td>
+      </tr>
+      <tr>
+        <td>Google Fonts @import</td>
+        <td><span class="dot-no">✗ 不可靠</span></td>
+        <td>外部字体CDN在公众号WebView中经常被拦截</td>
+      </tr>
+      <tr>
+        <td>系统字体</td>
+        <td><span class="dot-yes">✓ 可靠</span></td>
+        <td>苹方/微软雅黑/系统默认，最稳定</td>
+      </tr>
+      <tr>
+        <td>外链图片</td>
+        <td><span class="dot-no">✗ 禁止</span></td>
+        <td>必须上传到公众号素材库，用素材URL</td>
+      </tr>
+      <tr>
+        <td>Base64 内嵌图片</td>
+        <td><span class="dot-partial">△ 有限</span></td>
+        <td>小图标可以，大图会导致文章体积超限</td>
+      </tr>
+      <tr>
+        <td>CSS 动画 / JS</td>
+        <td><span class="dot-no">✗ 无效</span></td>
+        <td>公众号图文消息中 JS 和 CSS animation 均不生效</td>
+      </tr>
+      <tr>
+        <td>SVG 内联</td>
+        <td><span class="dot-partial">△ 部分</span></td>
+        <td>简单静态SVG有时可以，复杂SVG常被过滤</td>
+      </tr>
+      <tr>
+        <td>Flexbox / Grid</td>
+        <td><span class="dot-yes">✓ 支持</span></td>
+        <td>现代CSS布局属性基本支持，需内联写</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note warn">
+    <strong>公众号排版的核心策略</strong>
+    由于外部字体不可靠，我们的方案是：<br>
+    · 英文标题/标签用 IBM Plex 系列（在能加载的环境下），fallback 到系统等宽字体<br>
+    · 中文正文始终用系统字体（苹方 → 微软雅黑 → 系统默认）<br>
+    · 所有样式用 style="" 内联，不依赖外部CSS文件<br>
+    · 图片全部上传到公众号素材库后替换URL<br>
+    · 用纯色块、边框、字重、字号的层次代替图片装饰
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 · 特殊字体解决方案
+══════════════════════════════════════════ -->
+<section class="section" id="strategy">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <span class="section-title">特殊字体需求解决方案</span>
+  </div>
+
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">方案 A · Google Fonts 加载</span>
+      <span class="font-tag">适合：独立网页 / GitHub Pages</span>
+    </div>
+    <p style="font-size:0.88rem;line-height:1.7;margin-bottom:0.8rem;">在 &lt;head&gt; 引入 Google Fonts 链接，适用于你的 GitHub Pages 个人网站（<code>miyazawa-ron.github.io</code>）。IBM Plex 全系列、Playfair Display 等均完整可用。</p>
+    <code class="css-snippet">&lt;link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet"&gt;</code>
+  </div>
+
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">方案 B · 字体子集化 + Base64 内嵌</span>
+      <span class="font-tag">适合：仅需少量字符的标题字体</span>
+    </div>
+    <p style="font-size:0.88rem;line-height:1.7;">如果标题只用英文，可以把字体文件子集化（只保留用到的字符），压缩到几KB，再转成Base64内嵌进HTML。适合处理"Vol.01"、"Git"这类少量固定英文标题。工具：fonttools 的 pyftsubset，或在线工具 Font Squirrel。</p>
+  </div>
+
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">方案 C · 图片化标题</span>
+      <span class="font-tag">适合：需要精确字体的关键标题</span>
+    </div>
+    <p style="font-size:0.88rem;line-height:1.7;">在 AI/ID 里用任意字体排好标题，导出为 PNG（透明背景或白底），上传到公众号素材库作为图片使用。这样标题可以用你喜欢的任何字体，正文仍用系统字体。这也是<strong>目前最可靠的跨平台特殊字体方案</strong>。</p>
+  </div>
+
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-name">方案 D · 中文特殊字体（思源系列）</span>
+      <span class="font-tag">适合：GitHub Pages + 接受加载时间</span>
+    </div>
+    <p style="font-size:0.88rem;line-height:1.7;margin-bottom:0.6rem;">思源宋体（Source Han Serif）和思源黑体（Source Han Sans）是Adobe与Google联合出品的开源中文字体，字形优美，但全字集文件超过10MB。解决方案：</p>
+    <p style="font-size:0.88rem;line-height:1.7;">① 使用 <strong>Google Fonts 的思源系列</strong>（Noto Serif SC / Noto Sans SC），CDN按需加载，在独立网页上体验较好，公众号不可靠。</p>
+    <p style="font-size:0.88rem;line-height:1.7;margin-top:0.4rem;">② <strong>公众号完全放弃</strong>特殊中文字体，接受苹方/微软雅黑，在版式设计上用结构和留白弥补字体的局限。</p>
+  </div>
+</section>
+
+</body>
+</html>
