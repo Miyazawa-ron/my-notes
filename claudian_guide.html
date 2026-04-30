@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claudian 安装指南 · Windows & Mac</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #222535;
+    --border: #2e3250;
+    --accent: #7c6af7;
+    --accent2: #a78bfa;
+    --green: #34d399;
+    --yellow: #fbbf24;
+    --red: #f87171;
+    --blue: #60a5fa;
+    --text: #e2e4f0;
+    --muted: #8b90b0;
+    --code-bg: #141720;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .hero {
+    background: linear-gradient(135deg, #1a1d2e 0%, #12101e 50%, #0f1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(124,106,247,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(124,106,247,0.15);
+    border: 1px solid rgba(124,106,247,0.4);
+    color: var(--accent2);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 30%, var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 520px;
+    margin: 0 auto 28px;
+  }
+  .hero-tags {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tag {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .tag span { color: var(--green); margin-right: 4px; }
+
+  /* Layout */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+  .toc h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 24px;
+  }
+  .toc li { counter-increment: toc; }
+  .toc a {
+    color: var(--accent2);
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    color: var(--muted);
+    font-size: 11px;
+    min-width: 20px;
+  }
+  .toc a:hover { color: #fff; }
+
+  /* Sections */
+  .section { margin-bottom: 52px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .icon-purple { background: rgba(124,106,247,0.15); }
+  .icon-blue { background: rgba(96,165,250,0.12); }
+  .icon-green { background: rgba(52,211,153,0.12); }
+  .icon-yellow { background: rgba(251,191,36,0.12); }
+  .section-title { font-size: 20px; font-weight: 600; }
+  .section-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* Platform tabs */
+  .platform-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 14px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .tab-btn.active {
+    color: var(--accent2);
+    border-bottom-color: var(--accent);
+    background: rgba(124,106,247,0.06);
+  }
+  .tab-content {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    padding: 28px;
+  }
+  .tab-content.active { display: block; }
+
+  /* Steps */
+  .steps { display: flex; flex-direction: column; gap: 20px; }
+  .step {
+    display: flex;
+    gap: 16px;
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(124,106,247,0.2);
+    border: 1px solid rgba(124,106,247,0.4);
+    color: var(--accent2);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-body { flex: 1; }
+  .step-body h4 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .step-body p { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+
+  /* Code blocks */
+  .code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 10px 0;
+    position: relative;
+    overflow-x: auto;
+  }
+  .code-block pre {
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 13px;
+    color: #c9d1d9;
+    white-space: pre;
+  }
+  .code-block .comment { color: #6e7681; }
+  .code-block .cmd { color: var(--green); }
+  .code-block .path { color: var(--blue); }
+  .code-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  /* Alert boxes */
+  .alert {
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 14px 0;
+    font-size: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .alert-icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+  .alert-warn {
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.25);
+    color: #fde68a;
+  }
+  .alert-info {
+    background: rgba(96,165,250,0.08);
+    border: 1px solid rgba(96,165,250,0.2);
+    color: #bfdbfe;
+  }
+  .alert-tip {
+    background: rgba(52,211,153,0.08);
+    border: 1px solid rgba(52,211,153,0.2);
+    color: #a7f3d0;
+  }
+
+  /* Requirements table */
+  .req-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .req-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .req-card .req-icon { font-size: 20px; margin-bottom: 8px; }
+  .req-card .req-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .req-card .req-desc { font-size: 12px; color: var(--muted); }
+
+  /* Troubleshoot */
+  .trouble-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .trouble-q {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--yellow);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .trouble-a { font-size: 14px; color: var(--muted); }
+
+  /* Path table */
+  .path-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  .path-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .path-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(46,50,80,0.5);
+    vertical-align: top;
+  }
+  .path-table td:last-child { font-family: monospace; color: var(--blue); font-size: 12px; }
+  .path-table tr:last-child td { border-bottom: none; }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .footer a { color: var(--accent2); text-decoration: none; }
+
+  code {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: monospace;
+    font-size: 13px;
+    color: var(--accent2);
+  }
+
+  @media (max-width: 600px) {
+    .toc ol { grid-template-columns: 1fr; }
+    .req-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">安装指南</div>
+  <h1>Claudian</h1>
+  <p>将 Claude Code 嵌入 Obsidian 的 AI 协作插件，适用于 Windows 与 macOS</p>
+  <div class="hero-tags">
+    <div class="tag"><span>●</span>Obsidian Plugin</div>
+    <div class="tag"><span>●</span>Claude Code</div>
+    <div class="tag"><span>●</span>Windows · macOS</div>
+    <div class="tag"><span>●</span>v1.3.70</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TOC -->
+  <div class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">插件简介</a></li>
+      <li><a href="#requirements">前提条件</a></li>
+      <li><a href="#install">安装步骤</a></li>
+      <li><a href="#windows">Windows 配置</a></li>
+      <li><a href="#mac">macOS 配置</a></li>
+      <li><a href="#troubleshoot">常见问题</a></li>
+    </ol>
+  </div>
+
+  <!-- Overview -->
+  <div class="section" id="overview">
+    <div class="section-header">
+      <div class="section-icon icon-purple">✦</div>
+      <div>
+        <div class="section-title">插件简介</div>
+        <div class="section-sub">Claudian 是什么？</div>
+      </div>
+    </div>
+    <p style="color:var(--muted); margin-bottom:16px;">Claudian 将 Claude Code CLI 的完整 Agent 能力嵌入 Obsidian，让你的 Vault 成为 Claude 的工作目录。它可以读写文件、执行 Bash 命令、多步骤工作流，甚至支持 MCP 服务器和自定义 Agent。</p>
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="req-icon">📂</div>
+        <div class="req-name">文件读写</div>
+        <div class="req-desc">在 Vault 内自由读写、搜索文件</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">💻</div>
+        <div class="req-name">Bash 执行</div>
+        <div class="req-desc">执行终端命令，完整 CLI 能力</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">🔗</div>
+        <div class="req-name">MCP 支持</div>
+        <div class="req-desc">连接外部工具与数据源</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">✏️</div>
+        <div class="req-name">内联编辑</div>
+        <div class="req-desc">选中文字，直接在笔记中 AI 编辑</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Requirements -->
+  <div class="section" id="requirements">
+    <div class="section-header">
+      <div class="section-icon icon-yellow">⚙</div>
+      <div>
+        <div class="section-title">前提条件</div>
+        <div class="section-sub">安装前请确认以下环境</div>
+      </div>
+    </div>
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="req-icon">🤖</div>
+        <div class="req-name">Claude Code CLI</div>
+        <div class="req-desc">必须提前安装，推荐 Native Install</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">🟣</div>
+        <div class="req-name">Obsidian v1.8.9+</div>
+        <div class="req-desc">Desktop 版本，移动端不支持</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">🔑</div>
+        <div class="req-name">Claude 订阅</div>
+        <div class="req-desc">Pro/API Key 或兼容 Anthropic 格式的第三方服务</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">💻</div>
+        <div class="req-name">操作系统</div>
+        <div class="req-desc">Windows · macOS · Linux（仅桌面端）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Install -->
+  <div class="section" id="install">
+    <div class="section-header">
+      <div class="section-icon icon-green">↓</div>
+      <div>
+        <div class="section-title">安装步骤</div>
+        <div class="section-sub">从 GitHub Release 安装（推荐）</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h4>下载 Release 文件</h4>
+          <p>前往 <a href="https://github.com/YishenTu/claudian/releases/latest" style="color:var(--accent2)">GitHub Releases 最新版本</a>，下载以下三个文件：</p>
+          <div class="code-block">
+            <pre><span class="cmd">main.js</span>
+<span class="cmd">manifest.json</span>
+<span class="cmd">styles.css</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h4>创建插件文件夹</h4>
+          <p>在你的 Vault 目录下，创建如下路径的文件夹，并将三个文件放入：</p>
+          <div class="code-block">
+            <pre><span class="path">你的Vault路径/.obsidian/plugins/claudian/</span>
+<span class="comment">├── main.js</span>
+<span class="comment">├── manifest.json</span>
+<span class="comment">└── styles.css</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h4>在 Obsidian 中启用插件</h4>
+          <p>打开 Obsidian → 设置 → 第三方插件 → 关闭「安全模式」→ 在列表中找到 <strong>Claudian</strong> → 开启</p>
+          <div class="alert alert-warn">
+            <div class="alert-icon">⚠</div>
+            <div>首次使用需要关闭「安全模式」才能加载第三方插件。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <h4>配置 Claude CLI 路径</h4>
+          <p>进入 Claudian 插件设置 → <strong>Advanced → Claude CLI path</strong>，填入 CLI 的绝对路径（见下方平台说明）。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-tip" style="margin-top:20px;">
+      <div class="alert-icon">💡</div>
+      <div><strong>BRAT 自动更新</strong>：如果希望自动跟进新版本，可从社区插件安装 BRAT，添加仓库地址 <code>YishenTu/claudian</code>，BRAT 会自动管理更新。</div>
+    </div>
+  </div>
+
+  <!-- Windows -->
+  <div class="section" id="windows">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🪟</div>
+      <div>
+        <div class="section-title">Windows 平台配置</div>
+        <div class="section-sub">特别注意事项</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>确认 Claude CLI 路径</h4>
+          <p>在 PowerShell 或命令提示符中执行：</p>
+          <div class="code-label">PowerShell</div>
+          <div class="code-block">
+            <pre><span class="cmd">where.exe claude</span></pre>
+          </div>
+          <p>将输出的路径填入 Claudian 插件设置 → Advanced → Claude CLI path。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>使用 .exe，避免 .cmd</h4>
+          <p>Windows 上 Obsidian 作为 GUI 程序无法正常调用 <code>.cmd</code> 包装脚本，必须指定 <code>claude.exe</code>。</p>
+          <div class="code-block">
+            <pre><span class="comment"># ✅ 正确（Native 安装）</span>
+<span class="path">C:\Users\你的用户名\AppData\Local\Claude\claude.exe</span>
+
+<span class="comment"># ✅ 正确（npm 安装，使用 cli.js）</span>
+<span class="path">C:\Users\你的用户名\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\cli.js</span>
+
+<span class="comment"># ❌ 避免使用</span>
+<span class="path">claude.cmd</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>PowerShell 执行策略</h4>
+          <p>若遇到脚本执行被阻止，以管理员身份运行 PowerShell 并执行：</p>
+          <div class="code-block">
+            <pre><span class="cmd">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mac -->
+  <div class="section" id="mac">
+    <div class="section-header">
+      <div class="section-icon icon-purple">🍎</div>
+      <div>
+        <div class="section-title">macOS 平台配置</div>
+        <div class="section-sub">特别注意事项</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>确认 Claude CLI 路径</h4>
+          <p>在终端执行：</p>
+          <div class="code-label">Terminal</div>
+          <div class="code-block">
+            <pre><span class="cmd">which claude</span></pre>
+          </div>
+          <p>将输出路径填入 Claudian 插件设置 → Advanced → Claude CLI path。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>创建插件文件夹（终端方式）</h4>
+          <div class="code-label">Terminal</div>
+          <div class="code-block">
+            <pre><span class="cmd">mkdir -p</span> <span class="path">"/path/to/vault/.obsidian/plugins/claudian"</span>
+<span class="cmd">cp</span> main.js manifest.json styles.css <span class="path">"/path/to/vault/.obsidian/plugins/claudian/"</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Node 版本管理器用户注意</h4>
+          <p>使用 nvm、fnm、volta 等工具安装 Claude Code 时，Obsidian 作为 GUI 应用可能无法读取 shell 环境变量，导致找不到 Node.js。</p>
+          <div class="alert alert-warn">
+            <div class="alert-icon">⚠</div>
+            <div>在插件设置 → Environment → Custom variables 中手动添加 Node.js 的 bin 路径：<br><br><code>PATH=/path/to/node/bin:$PATH</code></div>
+          </div>
+          <p>检查 <code>claude</code> 与 <code>node</code> 是否在同一目录：</p>
+          <div class="code-block">
+            <pre><span class="cmd">dirname</span> $(which claude)
+<span class="cmd">dirname</span> $(which node)</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Troubleshoot -->
+  <div class="section" id="troubleshoot">
+    <div class="section-header">
+      <div class="section-icon icon-yellow">🔧</div>
+      <div>
+        <div class="section-title">常见问题</div>
+        <div class="section-sub">Troubleshooting</div>
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q">⚠ spawn claude ENOENT / Claude CLI not found</div>
+      <div class="trouble-a">
+        <p style="margin-bottom:10px;">插件无法自动检测到 Claude 安装位置。常见于使用 Node 版本管理器（nvm/fnm/volta）的情况。</p>
+        <p style="margin-bottom:10px;"><strong>解决方法</strong>：在 Claudian 插件设置 → Advanced → Claude CLI path 中填写完整路径。</p>
+        <table class="path-table">
+          <tr>
+            <th>平台</th>
+            <th>命令</th>
+            <th>示例路径</th>
+          </tr>
+          <tr>
+            <td>macOS / Linux</td>
+            <td><code>which claude</code></td>
+            <td>/Users/you/.volta/bin/claude</td>
+          </tr>
+          <tr>
+            <td>Windows (native)</td>
+            <td><code>where.exe claude</code></td>
+            <td>C:\Users\you\AppData\Local\Claude\claude.exe</td>
+          </tr>
+          <tr>
+            <td>Windows (npm)</td>
+            <td><code>npm root -g</code></td>
+            <td>{root}\@anthropic-ai\claude-code\cli.js</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q">⚠ npm CLI 与 Node.js 不在同一目录</div>
+      <div class="trouble-a">
+        <p>GUI 应用（Obsidian）可能找不到 Node.js。推荐使用 Native 安装方式，或在插件 Environment 设置中手动添加 Node.js bin 目录路径。</p>
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q">⚠ 插件列表中没有出现 Claudian</div>
+      <div class="trouble-a">
+        <p>请确认：① 安全模式已关闭；② 三个文件（main.js、manifest.json、styles.css）均已正确放入 <code>.obsidian/plugins/claudian/</code> 文件夹；③ 重启 Obsidian 后再尝试。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>基于 <a href="https://github.com/YishenTu/claudian">YishenTu/claudian</a> 官方文档整理 · 个人学习笔记</p>
+  <p style="margin-top:6px;">👉 <a href="https://miyazawa-ron.github.io/my-notes/">返回笔记首页</a></p>
+</div>
+
+</body>
+</html>
