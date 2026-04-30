@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>代码的记忆 · Git 前世今生 · 编程工具系列 Vol.01</title>
+<style>
+  :root {
+    --bg: #faf8f4;
+    --ink: #1c1a17;
+    --ink2: #5a5248;
+    --accent: #c0392b;
+    --rule: #ddd8ce;
+    --aside-bg: #f0ece4;
+    --code-bg: #1e1c1a;
+    --code-fg: #e8e0d0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 17px; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "PingFang SC", "苹方", "Noto Serif SC", "Microsoft YaHei", "微软雅黑", serif;
+    line-height: 1.85;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  /* ── HEADER ── */
+  .series-tag {
+    font-family: "IBM Plex Mono", "SF Mono", "Courier New", monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  h1 {
+    font-family: "PingFang SC", "苹方", "Microsoft YaHei", sans-serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .subtitle {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    color: var(--ink2);
+    letter-spacing: 0.1em;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  /* ── BODY TEXT ── */
+  p {
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  /* ── SECTION BREAK ── */
+  .section-break {
+    text-align: center;
+    color: var(--rule);
+    letter-spacing: 0.5em;
+    margin: 2.5rem 0;
+    font-size: 0.8rem;
+    user-select: none;
+  }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    margin: 2rem 0;
+    padding: 1rem 1.4rem;
+    background: var(--aside-bg);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+  .pull-quote cite {
+    display: block;
+    font-style: normal;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.62rem;
+    color: var(--ink2);
+    letter-spacing: 0.08em;
+    margin-top: 0.5rem;
+  }
+
+  /* ── TECHNICAL NOTE ── */
+  .tech-note {
+    background: var(--aside-bg);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 1.2rem 1.4rem;
+    margin: 2rem 0;
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--ink2);
+  }
+  .tech-note-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  /* ── FOOTER ── */
+  .article-footer {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.65rem;
+    color: var(--ink2);
+    letter-spacing: 0.08em;
+    line-height: 2;
+  }
+  .next-up {
+    color: var(--accent);
+    font-size: 0.68rem;
+  }
+</style>
+</head>
+<body>
+
+<span class="series-tag">编程工具系列 · Programming Tools · Vol.01</span>
+
+<h1>代码的记忆</h1>
+<p class="subtitle">Git 前世今生 · 2025</p>
+
+<p>1991年，一个芬兰大学生把自己写的操作系统内核发布在了互联网上，附上一句轻描淡写的话："这只是个爱好项目，不会像GNU那样大或专业。"</p>
+
+<p>没有人预料到接下来会发生什么。</p>
+
+<p>全球的程序员开始给这个叫做Linux的项目发送补丁。不是通过什么系统，不是通过什么平台——是通过电子邮件。一个程序员在芬兰改了一段代码，把修改前后的差异导出成一个.patch文件，写一封邮件发给Linus Torvalds，然后等待。Linus读邮件，读补丁，觉得好就手动合并进去，觉得不好就回复说哪里有问题。</p>
+
+<p>这件事持续了十年。</p>
+
+<p>在旁人看来，这几乎是不可思议的原始。但它就这样运转着，而且运转得相当好——好到Linux内核在2002年已经有了数百万行代码，来自世界各地的贡献者。</p>
+
+<p>那一年，他们终于引入了一个真正的版本控制工具。</p>
+
+<div class="section-break">· · ·</div>
+
+<p>在谈那个工具之前，我们需要先理解一个更基本的问题：软件开发为什么需要"版本控制"这件事？</p>
+
+<p>答案藏在每一个写过代码的人都经历过的恐惧里。</p>
+
+<p>你改了一个文件。程序跑起来了，但另一个地方坏掉了。你想回到"之前那个能用的版本"——但你不记得改了什么。或者你和另一个人同时改了同一个文件，最后合并的时候，有一个人的工作消失了。</p>
+
+<p>在版本控制系统出现之前，程序员的解决方案是……文件夹命名。项目_最终版。项目_最终版_真的是最终版。项目_备份_千万别动。这不是笑话，这是真实存在于无数服务器上的目录结构，直到今天依然如此。</p>
+
+<p>第一个真正意义上的版本控制系统诞生于1972年，在Bell Labs，叫SCCS。它解决了最基本的问题：记录一个文件的修改历史，让你可以回到任意一个历史状态。十年后，RCS做了同样的事，但更快更聪明。</p>
+
+<p>但这两个系统有一个根本局限：它们只能在你自己的电脑上工作，而且每次只能管理单个文件。对于一个人写代码来说够用，对于一个团队来说，完全不够。</p>
+
+<div class="section-break">· · ·</div>
+
+<p>于是出现了CVS，然后是SVN。</p>
+
+<p>这两个系统引入了一个在当时看来非常自然的概念：中央服务器。</p>
+
+<p>设想一个图书馆。所有的书（代码）都存放在图书馆里（服务器上）。你想修改某本书，先去借出来，改完再还回去。如果两个人同时想改同一本书，图书馆会协调，告诉你"有人正在修改，请稍候"，或者帮你把两份修改合并在一起。</p>
+
+<p>这个模型运行了将近二十年，养活了整个软件行业。Apache基金会用它，Python语言用它，无数公司的内部系统用它。</p>
+
+<p>但它有一个致命的、从架构层面就无法修复的问题：</p>
+
+<p>图书馆关门了，所有人都没法工作。</p>
+
+<p>服务器宕机，没法提交代码。网络断了，没法查看历史。甚至，你想知道昨天谁改了哪一行——这么简单的一个问题，都需要联网去问服务器。你在出差途中的飞机上，想整理一下代码，对不起，你做不到。</p>
+
+<p>更深层的问题是分支。在SVN里，创建一个分支意味着在服务器上复制整个项目目录——代价昂贵，操作繁琐，合并时噩梦丛生。于是大多数团队的实践变成了：尽量不用分支，所有人在同一条线上工作，祈祷不要发生冲突。</p>
+
+<p>这是一种将就，不是解决方案。</p>
+
+<div class="pull-quote">
+  "SVN 比 CVS 好，就像根管治疗比截肢好一样。"
+  <cite>— 流传于开发者社区的刻薄评价</cite>
+</div>
+
+<div class="section-break">· · ·</div>
+
+<p>2002年，Linux内核项目采用了一个叫BitKeeper的版本控制工具。</p>
+
+<p>BitKeeper是商业软件，但它向开源社区提供免费授权。更重要的是，它是分布式的——每个开发者的电脑上都有一份完整的仓库，不依赖中央服务器。这对Linux这样地理分散、时区横跨全球的项目来说，是巨大的改变。</p>
+
+<p>Linus Torvalds后来承认，BitKeeper让他第一次真正体会到分布式版本控制的好处。</p>
+
+<p>这种好日子持续了三年。</p>
+
+<p>2005年春天，BitKeeper公司撤回了对Linux社区的免费授权。理由是：有开发者试图对BitKeeper的协议进行逆向工程。公司的愤怒可以理解，但结果是，Linux内核项目突然失去了核心工具，而且迫在眉睫——他们需要立即找到替代方案。</p>
+
+<p>Linus环顾四周，看了看市面上所有的版本控制系统，然后做了一个很多人至今仍觉得不可思议的决定：</p>
+
+<p>我自己来写一个。</p>
+
+<div class="section-break">· · ·</div>
+
+<p>2005年4月3日，Linus开始写Git。</p>
+
+<p>他给自己定了几条标准，这几条标准直接来自他对现有系统的不满：速度要快，必须支持分布式，必须保证数据完整性，分支和合并必须是廉价的日常操作。</p>
+
+<p>十天后，Git已经能够托管自己的开发流程。也就是说，Git是用Git来开发的。</p>
+
+<p>这不仅仅是一个工程成就，它更像是一种宣言：我做到了，而且够用。</p>
+
+<p>两个月后，Linux内核2.6.12正式使用Git管理代码。Linus随即将Git的主要维护工作交给了Junio Hamano，一个日裔美国工程师，此后几乎从未间断地担任Git的主要维护者，直到今天。</p>
+
+<p>Git的名字？Linus说，这是英国俚语，意思是"蠢货"。他说："我用自己的名字命名了所有项目。先是Linux，现在是Git。"</p>
+
+<div class="section-break">· · ·</div>
+
+<p>那么，Linus到底做了什么不一样的事？</p>
+
+<p>理解Git的核心，需要先理解它与SVN在思维方式上的一个根本差异。</p>
+
+<p>SVN记录的是变化。每次你提交代码，SVN存储的是"这个文件的第三行从A变成了B"。重建某个历史版本，需要从最初的状态开始，把所有的变化一步步累加起来。这就像一本流水账日记：要知道某一天的状态，你必须从第一天开始往后翻。</p>
+
+<p>Git记录的是快照。每次提交，Git为整个项目拍一张照片，存起来。要切换到任意一个历史版本，直接拿出那张照片就好。没有变化的文件不会重复存储——Git足够聪明，知道"这张照片里的这个角落和上张照片完全一样，我只需要保存一个链接"。</p>
+
+<div class="tech-note">
+  <span class="tech-note-label">技术注记</span>
+  Git的快照被称为"commit对象"。每个commit包含：一个指向项目完整目录结构的指针、指向父commit的指针（历史链条）、作者信息、提交时间，以及你写的那条提交信息。这些内容合并计算出一个40位的哈希字符串，作为这次提交的唯一标识符。哈希的特性保证了：任何内容的改变都会产生完全不同的哈希——数据伪造或损坏在Git里无处遁形。
+</div>
+
+<p>还有一件事：Git的几乎所有操作都在本地完成。查看历史，不用联网。比较版本，不用联网。创建分支，不用联网。提交代码，不用联网。网络只在你明确要求和其他人同步时才会用到。</p>
+
+<p>这在今天听起来理所当然，但在2005年，这是一种范式的转移。</p>
+
+<div class="section-break">· · ·</div>
+
+<p>Git里有一个概念，是理解它的钥匙，也是很多初学者最困惑的地方：分支。</p>
+
+<p>在SVN里，分支是一件郑重其事的操作。你需要在服务器上创建一个新目录，把整个项目复制过去，然后在那个副本上工作。创建分支意味着磁盘空间的消耗，意味着时间的等待，意味着后续合并时的高风险。所以大家尽量避免分支。</p>
+
+<p>在Git里，分支是一个41字节的文件。</p>
+
+<p>这不是夸张。Git的分支，在底层就是一个小小的文本文件，里面存储着一个40位的哈希值——指向某一个commit。创建分支就是新建这个文件，耗时毫秒，不复制任何数据，不占用任何额外磁盘空间。删除分支就是删除这个文件。</p>
+
+<p>这个设计让"分支"从一件大事变成了一件小事。于是，Git鼓励的开发方式变成了：每个新功能开一个分支，每个bug修复开一个分支，实验性的想法开一个分支，想改就改，改坏了直接丢掉，代码库丝毫不受影响。</p>
+
+<p>分支的廉价，根本性地改变了团队协作的方式。</p>
+
+<div class="section-break">· · ·</div>
+
+<p>2008年，一个叫GitHub的网站上线了。</p>
+
+<p>GitHub做的事情说起来很简单：它给Git仓库提供云端托管，让你可以把代码放在网上，和其他人分享。但它做的远不止于此——它把"查看别人的代码"、"提出修改建议"、"讨论一个改动是否应该被接受"这些协作行为，包装成了一套流畅的界面和工作流。</p>
+
+<p>Pull Request这个概念，是GitHub的发明。你在自己的分支上做了修改，想把它合并进主线，你提一个Pull Request——这是一个请求，一个讨论的起点，一个代码审查的场所，最终是一个合并或拒绝的决定。这套流程如此合理，以至于今天几乎所有的代码协作都在这个框架里发生。</p>
+
+<p>Git给了工具，GitHub给了社区。两者结合，在接下来的十年里，重塑了整个软件行业的协作方式。</p>
+
+<p>2018年，微软以75亿美元收购了GitHub。这个数字本身就说明了一切：一个十三年前因为版权纠纷仓促诞生的工具，已经成为全球软件开发的基础设施。</p>
+
+<div class="section-break">· · ·</div>
+
+<p>今天，如果你打开一台新电脑准备写代码，无论你用什么语言，无论你做什么项目，第一件事几乎一定是：</p>
+
+<p style="font-family:'IBM Plex Mono','SF Mono','Courier New',monospace;font-size:0.88rem;background:var(--code-bg);color:var(--code-fg);padding:0.8rem 1.2rem;letter-spacing:0.05em;">git init</p>
+
+<p>两个单词，初始化一个仓库，从这一刻起，你的每一次改动都可以被追踪、被回溯、被分享、被协作。</p>
+
+<p>Git的影响已经溢出了软件开发本身。有人用Git管理写作，管理论文，管理法律文件。有城市用Git管理城市法规的修订历史。Git的那套思维方式——版本、分支、合并、回滚——开始渗透进任何需要"追踪变化"的领域。</p>
+
+<p>一个愤怒的芬兰程序员用十天写出来的东西，改变了世界协作的方式。</p>
+
+<p>这不是第一次，也不会是最后一次。</p>
+
+<div class="article-footer">
+  <p>编程工具系列 · Programming Tools Deep Dive</p>
+  <p>Vol.01 · Git 前世今生</p>
+  <br>
+  <p class="next-up">→ 下一篇：Vol.02 · SSH与密钥体系</p>
+  <p style="margin-top:0.3rem;">当你输入 git push，你的代码是如何安全地穿越互联网到达服务器的。</p>
+</div>
+
+</body>
+</html>
