@@ -17,6 +17,15 @@
 
 ---
 
+## 🤖 AI 工具系列
+
+| 文章 | 内容 | 分类 |
+|---|---|---|
+| [Claudian 安装指南](https://miyazawa-ron.github.io/my-notes/claudian_guide.html) | Windows & macOS 完整安装配置流程 · Claude Code · Obsidian 插件 | 工具 AI |
+| [Hermes Agent + 微信部署](https://miyazawa-ron.github.io/my-notes/hermes_wechat_guide.html) | Linux VM · 微信网关 · Hermes Agent 全流程 | 工具 AI |
+
+---
+
 ## ✍️ 编程工具系列
 
 | 文章 | 内容 | 期数 |
@@ -37,4 +46,3 @@
 - [ ] N4 → 当前阶段
 - [ ] N3
 - [ ] N2 目标
-
