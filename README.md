@@ -17,6 +17,14 @@
 
 ---
 
+## ✍️ 编程工具系列
+
+| 文章 | 内容 | 期数 |
+|---|---|---|
+| [代码的记忆·Git前世今生](https://miyazawa-ron.github.io/my-notes/git-article-01.html) | 从补丁邮件到分布式版本控制，Git的诞生故事 | Vol.01 |
+
+---
+
 ## 🗂 导航首页
 
 👉 [打开笔记导航](https://miyazawa-ron.github.io/my-notes/)
