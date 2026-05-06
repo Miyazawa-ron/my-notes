@@ -1,7 +1,8 @@
 # AI图片生成中转站 — 搭建任务清单
 
 > 目标：为国内朋友搭建自助AI图片生成网站
-> 域名：skylife-sakura.com（Cloudflare 托管）
+> 网站地址：https://skylife-image.skylife-sakura.workers.dev
+> 域名：skylife-sakura.com（Cloudflare 托管，待绑定）
 
 ---
 
@@ -11,7 +12,7 @@
 |------|------|
 | 用户登录 | 邮箱注册 + 登录账号系统 |
 | 计费方式 | 充值余额，按用量扣费 |
-| 支持模型 | GPT Image + Seedance 双模型 |
+| 支持模型 | GPT Image（10积分/张）+ Seedance（20积分/次） |
 | 界面语言 | 中文 |
 | 支付方式 | 个人收款码 + 手动充值（起步阶段） |
 
@@ -19,71 +20,66 @@
 
 ## 技术栈（已定）
 
-| 层级 | 技术 | 原因 |
-|------|------|------|
-| 前端 | HTML + CSS + JS（单页） | 轻量，无需框架 |
-| 后端 | Cloudflare Workers | 无服务器，域名已在CF |
-| 数据库 | Cloudflare D1（SQLite） | 免费，够用 |
-| 部署 | Cloudflare Pages + Workers | 一体化，免费套餐足够 |
+| 层级 | 技术 |
+|------|------|
+| 前端 | HTML + CSS + JS（单页） |
+| 后端 | Cloudflare Workers |
+| 数据库 | Cloudflare D1（SQLite） |
+| 部署 | Cloudflare Workers + Assets |
 
 ---
 
 ## 第一阶段：账号与环境准备
 
-- [x] OpenAI 账号 — 已有并充值
-- [x] 火山引擎账号 — 已注册
+- [x] OpenAI 账号 — 已有并充值（$10）
+- [x] 火山引擎账号 — 已注册，API Key 已配置
 - [x] 域名 skylife-sakura.com — Cloudflare 已注册
-- [ ] 火山引擎 — 控制台开通 Seedance API，复制 API Key
-- [ ] OpenAI — 复制 API Key 备用
+- [x] OpenAI API Key — 已配置到 Cloudflare Secrets
+- [x] 火山引擎 API Key — 已配置到 Cloudflare Secrets
 
 ---
 
 ## 第二阶段：技术环境准备
 
-- [ ] 安装 Node.js（Windows PC）— https://nodejs.org 下载LTS版
-- [ ] 安装 Wrangler CLI（Cloudflare 开发工具）
-      npm install -g wrangler
-- [ ] Wrangler 登录 Cloudflare 账号
-      wrangler login
-- [x] VS Code 已有
-- [x] GitHub 账号 miyazawa-ron 已有
+- [x] Node.js v22.22.2 — Mac 已安装
+- [x] Wrangler 4.87.0 — 已安装并登录
+- [x] VS Code — 已有
+- [x] GitHub 账号 miyazawa-ron — 已有
 
 ---
 
-## 第三阶段：搭建顺序
+## 第三阶段：搭建（已完成）
 
-### Step 1 — 创建 Cloudflare D1 数据库
-- [ ] 建库：wrangler d1 create image-site-db
-- [ ] 建表：users（用户）、transactions（充值记录）、generations（生图记录）
-
-### Step 2 — 搭后端 Worker
-- [ ] 用户注册 / 登录 / Token 验证接口
-- [ ] 余额查询 / 管理员充值接口
-- [ ] GPT Image 生图接口
-- [ ] Seedance 生图接口
-
-### Step 3 — 搭前端页面
-- [ ] 注册 / 登录页
-- [ ] 主界面（提示词输入 + 模型选择 + 生成按钮）
-- [ ] 图片展示区 + 历史记录
-- [ ] 余额显示
-- [ ] 管理员充值页（简单密码保护）
-
-### Step 4 — 部署上线
-- [ ] 部署 Worker 到 Cloudflare
-- [ ] 绑定 skylife-sakura.com 域名
-- [ ] 全流程测试
+- [x] 创建 Cloudflare D1 数据库 skylife-db（APAC区域）
+- [x] 建表：users / transactions / generations
+- [x] 后端 Worker（src/index.js）— 所有API接口完成
+- [x] 前端页面（public/index.html）— 中文界面完成
+- [x] 部署上线 — 已部署到 workers.dev
 
 ---
 
-## API 资源汇总
+## 第四阶段：测试结果
 
-| 服务 | 状态 | 备注 |
-|------|------|------|
-| OpenAI（GPT Image） | 已有 | 日本网络直连 |
-| 火山引擎（Seedance） | 已注册 | 待获取 API Key |
-| 域名 skylife-sakura.com | 已注册 | Cloudflare 托管 |
-| Cloudflare Workers/D1 | 待开通 | 免费套餐足够 |
+- [x] 用户注册/登录 — 正常
+- [x] 管理员后台 — 正常（充值/用户列表）
+- [x] GPT Image 生图 — 成功！（日式庭院水墨风格测试通过）
+- [ ] Seedance 视频生成 — 待测试
+- [ ] 绑定自定义域名 skylife-sakura.com
+
+---
+
+## API 接口列表
+
+| 接口 | 功能 |
+|------|------|
+| POST /api/register | 用户注册 |
+| POST /api/login | 用户登录 |
+| GET /api/me | 查看余额 |
+| POST /api/generate/gpt | GPT Image 生图（扣10积分） |
+| POST /api/generate/seedance | Seedance 生成（扣20积分） |
+| GET /api/history | 历史记录 |
+| POST /api/admin/topup | 管理员充值 |
+| GET /api/admin/users | 管理员查看用户 |
 
 ---
 
@@ -91,9 +87,18 @@
 
 | 阶段 | 方案 |
 |------|------|
-| 起步 | 个人收款码 + 手动充值（管理员后台加余额） |
+| 起步（当前） | 个人收款码 + 管理员手动充值积分 |
 | 扩大 | 聚合免签支付（码支付/Epay，自动回调） |
 
 ---
 
-最后更新：2026-05-05（需求已确认，进入搭建阶段）
+## 后续待办
+
+- [ ] 绑定 skylife-sakura.com 域名
+- [ ] 测试 Seedance 视频生成
+- [ ] 给朋友开通账号并充值积分
+- [ ] 考虑升级自动支付（用量增大后）
+
+---
+
+最后更新：2026-05-06（GPT Image 生图测试成功，平台正式上线！）
