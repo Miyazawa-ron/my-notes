@@ -3,3 +3,7 @@
   - [N5/N4 语法参考](n5_n4_grammar_reference)
 - 工具 & 指南
   - [Hermes 微信助理部署](hermes_wechat_guide)
+  - [Claudian 安装指南](claudian_guide)
+  - [字体参考手册](font-reference)
+- 编程工具系列
+  - [Vol.01 Git 前世今生](git-article-01)
